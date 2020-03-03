@@ -163,7 +163,6 @@ progress:  {type:  String}  //Time in seconds watched
 ```
 <br>
 
-  
 
 ## API Endpoints (backend routes)
 
