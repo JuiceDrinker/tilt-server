@@ -17,7 +17,7 @@ An application to listen, follow and upload your favourite podcasts.
 - **Random Episode:** As a user I can get a pseudo-random episode of a random podcast
 - **Filter Podcast:** As a user I can filter the podcasts I see to a specific language/genres/regions
 - **Recommendations:** As a user I can see recommendations for podcasts/episodes depending on what I have been listening to
-  --**Edit Profile** As a user I can edit my profile
+- **Edit Profile** As a user I can edit my profile
 
 ## Backlog
 
@@ -108,42 +108,8 @@ User model
   username: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  favorites: [Tournament]
+  listenedPodcasts: [Podcast [[episodeID, progress]]]
 }
-```
-
-Tournament model
-
-```javascript
- {
-   name: {type: String, required: true},
-   img: {type: String},
-   players: [{type: Schema.Types.ObjectId,ref:'Participant'}],
-   games: [{type: Schema.Types.ObjectId,ref:'Game'}]
- }
-```
-
-Player model
-
-```javascript
-{
-  name: {type: String, required: true},
-  img: {type: String},
-  score: []
-}
-```
-
-Game model
-
-```javascript
-{
-  player1: [{type: Schema.Types.ObjectId,ref:'Participant'}],
-  player2: [{type: Schema.Types.ObjectId,ref:'Player'}],
-  player2: [{type: Schema.Types.ObjectId,ref:'Player'}],
-  winner: {type: String},
-  img: {type: String}
-}
-```
 
 <br>
 
@@ -184,9 +150,9 @@ or picture of your physical board
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/screeeen/project-client)
+[Client repository Link](https://github.com/JuiceDrinker/tilt-client)
 
-[Server repository Link](https://github.com/screeeen/project-server)
+[Server repository Link](https://github.com/JuiceDrinker/tilt-server)
 
 [Deployed App Link](http://heroku.com)
 
@@ -195,3 +161,4 @@ The url to your repository and to your deployed project
 The url to your presentation slides
 
 [Slides Link](http://slides.com)
+```
