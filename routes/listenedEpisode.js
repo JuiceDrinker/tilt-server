@@ -16,11 +16,5 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
   } catch (error) {
     next(createError(error));
   }
-
-  //   User.find({ id: _id })
-  //     .then(userObj => {
-  //       usesrObj.listenedEpisodes.push();
-  //     })
-  //     .catch(err => {});
 });
 module.exports = listenedEpisodeRouter;
