@@ -75,10 +75,18 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 // GET '/auth/me'
 router.get('/me', isLoggedIn, (req, res, next) => {
-  const currentUserSessionData = req.session.currentUser;
-  currentUserSessionData.password = '*';
+  // const currentUserSessionData = req.session.currentUser;
+  // currentUserSessionData.password = '*';
   
-  res.status(200).json(currentUserSessionData);
+  // res.status(200).json(currentUserSessionData);
+  const {_id} = req.session.currentUser
+  User.findById(_id).populate('listenedEpisodes')
+    .then(currentUser=>{
+      // currentUser.password = '*'
+      res.status(200).json(currentUser)
+    })
+    .catch(err=> console.log(err))
+    
 });
 
 module.exports = router;

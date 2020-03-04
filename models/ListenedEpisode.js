@@ -6,6 +6,7 @@ const listenedEpisode = new Schema({
   progress: { type: Number, required: true, default: 0 } //Time listened in seconds
 });
 
-const ListenedEpisode = mongoose.model("ListenezEpisode", listenedEpisode);
+const ListenedEpisode = mongoose.model("ListenedEpisode", listenedEpisode);
 
 module.exports = ListenedEpisode;
+    

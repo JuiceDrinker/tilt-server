@@ -17,4 +17,20 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
     next(createError(error));
   }
 });
+
+listenedEpisodeRouter.put("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { progress } = req.body;
+    ListenedEpisode.findByIdAndUpdate(id, { progress: progress })
+      .then(result => {
+        res.send(200).json(result);
+      })
+      .catch(err => {
+        next(createError(err));
+      });
+  } catch (error) {
+    next(createError(error));
+  }
+});
 module.exports = listenedEpisodeRouter;
