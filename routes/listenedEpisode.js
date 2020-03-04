@@ -22,13 +22,8 @@ listenedEpisodeRouter.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const { progress } = req.body;
-    ListenedEpisode.findByIdAndUpdate(id, { progress: progress })
-      .then(result => {
-        res.send(200).json(result);
-      })
-      .catch(err => {
-        next(createError(err));
-      });
+    await ListenedEpisode.findByIdAndUpdate(id, { progress: progress });
+    res.send(200).json();
   } catch (error) {
     next(createError(error));
   }
