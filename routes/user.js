@@ -1,17 +1,21 @@
 const express = require("express");
 const userRouter = express.Router();
 const createError = require("http-errors");
-const User = require("../models/user");
+const User = require("../models/User");
 
-userRouter.get("/delete-user", (req, res, next) => {
+userRouter.delete("/", (req, res, next) => {
   //Get user by ID
   const { _id } = req.session.currentUser;
   console.log("id :", _id);
-  User.findByIdAndRemove(req.session.currentUser)
+  User.findByIdAndDelete(_id)
     .then(() => {
+      console.log("delete");
+
       req.session.destroy(err => {
         if (err) next(createError);
-        else res.status(204);
+        else {
+          res.status(204).json();
+        }
       });
     })
     .catch(err => {

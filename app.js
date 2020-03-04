@@ -11,13 +11,16 @@ require("dotenv").config();
 
 const auth = require("./routes/auth");
 const user = require("./routes/user");
+const listenedEpisode = require("./routes/listenedEpisode");
 
 // MONGOOSE CONNECTION
 mongoose
   .connect(process.env.MONGODB_URI, {
     keepAlive: true,
     useNewUrlParser: true,
-    reconnectTries: Number.MAX_VALUE
+    reconnectTries: Number.MAX_VALUE,
+    useFindAndModify: false,
+    useUnifiedTopology: true
   })
   .then(() => console.log(`Connected to database`))
   .catch(err => console.error(err));
@@ -66,6 +69,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // ROUTER MIDDLEWARE
 app.use("/auth", auth);
 app.use("/user", user);
+app.use("/listenedEpisode", listenedEpisode);
 
 // 404
 // catch 404 and forward to error handler

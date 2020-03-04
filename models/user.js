@@ -5,11 +5,9 @@ const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: true },
-    listenedEpisodes: {
-      type: [Schema.Types.ObjectId],
-      ref: "listenedEpisodes",
-      default: []
-    }
+    listenedEpisodes: [
+      { type: Schema.Types.ObjectId, ref: "ListenedEpisode", default: [] }
+    ]
   },
   {
     timestamps: {
