@@ -12,7 +12,7 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
     await User.findByIdAndUpdate(userID, {
       $push: { listenedEpisodes: newListenedEpisode._id }
     });
-    res.status(200).json(newListenedEpisode);
+    res.sendStatus(200).json(newListenedEpisode);
   } catch (error) {
     next(createError(error));
   }

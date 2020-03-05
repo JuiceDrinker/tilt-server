@@ -74,6 +74,7 @@ app.use("/listenedEpisode", listenedEpisode);
 // 404
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  console.log("err");
   res.status(404).json({ code: "not found" });
 });
 
