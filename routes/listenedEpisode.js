@@ -12,7 +12,7 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
     await User.findByIdAndUpdate(userID, {
       $push: { listenedEpisodes: newListenedEpisode._id }
     });
-    res.sendStatus(200).json(newListenedEpisode);
+    res.status(200);
   } catch (error) {
     next(createError(error));
   }
@@ -20,9 +20,12 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
 
 listenedEpisodeRouter.put("/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { progress } = req.body;
-    await ListenedEpisode.findByIdAndUpdate(id, { progress: progress });
+    // const { id } = req.params;
+    // console.log("id :", id);
+    const { progress, id } = req.body;
+    console.log("progress :", progress);
+
+    await ListenedEpisode.findByIdAndUpdate(ObjectId(id), { progress: progress });
     res.send(200).json();
   } catch (error) {
     next(createError(error));
