@@ -6,7 +6,7 @@ const ListenedEpisode = require("../models/ListenedEpisode");
 
 listenedEpisodeRouter.post("/", async (req, res, next) => {
   try {
-    const userID = req.session.currentUser._id;
+    const userID = req.session.currentUser.id;
     const { episodeID } = req.body;
     const newListenedEpisode = await ListenedEpisode.create({ episodeID });
     await User.findByIdAndUpdate(userID, {
