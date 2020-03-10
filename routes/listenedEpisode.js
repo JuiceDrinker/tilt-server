@@ -5,9 +5,9 @@ const User = require("../models/User");
 const ListenedEpisode = require("../models/ListenedEpisode");
 
 //TODO: Create getOneById -> Return find({userID, episodeID})
-listenedEpisodeRouter.get("/", (req, res, next) => {
+listenedEpisodeRouter.get("/:episodeID", (req, res, next) => {
   const userID = req.session.currentUser._id;
-  const { episodeID } = req.body;
+  const { episodeID } = req.params;
   ListenedEpisode.find({ userID: userID, episodeID: episodeID })
     .then(returnedObj => {
       res.status(200).json(returnedObj);
@@ -32,7 +32,6 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
 });
 
 listenedEpisodeRouter.put("/", async (req, res, next) => {
-  console.log("req.body :", req.body);
   try {
     const { progress, id } = req.body;
     const userID = req.session.currentUser._id;
