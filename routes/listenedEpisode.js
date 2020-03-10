@@ -5,7 +5,17 @@ const User = require("../models/User");
 const ListenedEpisode = require("../models/ListenedEpisode");
 
 //TODO: Create getOneById -> Return find({userID, episodeID})
-
+listenedEpisodeRouter.get("/", (req, res, next) => {
+  const userID = req.session.currentUser._id;
+  const { episodeID } = req.body;
+  ListenedEpisode.find({ userID: userID, episodeID: episodeID })
+    .then(returnedObj => {
+      res.status(200).json(returnedObj);
+    })
+    .catch(err => {
+      console.log("err :", err);
+    });
+});
 
 listenedEpisodeRouter.post("/", async (req, res, next) => {
   try {
@@ -14,7 +24,7 @@ listenedEpisodeRouter.post("/", async (req, res, next) => {
     await ListenedEpisode.create({
       userID,
       episodeID
-    }); //TODO: INCLUDE USER ID
+    });
     res.status(200).json();
   } catch (error) {
     next(createError(error));
