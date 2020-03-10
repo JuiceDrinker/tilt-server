@@ -4,29 +4,33 @@ const createError = require("http-errors");
 const User = require("../models/User");
 const ListenedEpisode = require("../models/ListenedEpisode");
 
+//TODO: Create getOneById -> Return find({userID, episodeID})
+
+
 listenedEpisodeRouter.post("/", async (req, res, next) => {
   try {
-    const userID = req.session.currentUser.id;
+    const userID = req.session.currentUser._id;
     const { episodeID } = req.body;
-    const newListenedEpisode = await ListenedEpisode.create({ episodeID });
-    await User.findByIdAndUpdate(userID, {
-      $push: { listenedEpisodes: newListenedEpisode._id }
-    });
-    res.status(200);
+    await ListenedEpisode.create({
+      userID,
+      episodeID
+    }); //TODO: INCLUDE USER ID
+    res.status(200).json();
   } catch (error) {
     next(createError(error));
   }
 });
 
-listenedEpisodeRouter.put("/:id", async (req, res, next) => {
+listenedEpisodeRouter.put("/", async (req, res, next) => {
+  console.log("req.body :", req.body);
   try {
-    // const { id } = req.params;
-    // console.log("id :", id);
     const { progress, id } = req.body;
-    console.log("progress :", progress);
+    const userID = req.session.currentUser._id;
 
-    await ListenedEpisode.findByIdAndUpdate(ObjectId(id), { progress: progress });
-    res.send(200).json();
+    const filter = { userID: userID, episodeID: id };
+    const update = { progress: progress };
+    await ListenedEpisode.findOneAndUpdate(filter, update);
+    res.send(200);
   } catch (error) {
     next(createError(error));
   }

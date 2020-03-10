@@ -4,10 +4,7 @@ const ListenedEpisodes = require("./ListenedEpisode");
 const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true, unique: true },
-    listenedEpisodes: [
-      { type: Schema.Types.ObjectId, ref: "ListenedEpisode", default: [] }
-    ]
+    password: { type: String, required: true, unique: true }
   },
   {
     timestamps: {
@@ -20,3 +17,5 @@ const userSchema = new Schema(
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+
+//FIXME: ADD UserID to model
