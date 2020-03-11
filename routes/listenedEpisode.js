@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const User = require("../models/User");
 const ListenedEpisode = require("../models/ListenedEpisode");
 
-//TODO: Create getOneById -> Return find({userID, episodeID})
+//TODO: Create getOneById -> Return find({userID,  episodeID})
 listenedEpisodeRouter.get("/:episodeID", (req, res, next) => {
   const userID = req.session.currentUser._id;
   const { episodeID } = req.params;
